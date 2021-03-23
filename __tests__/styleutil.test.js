@@ -1,4 +1,3 @@
-/*
 import {filterInheritStyle, getStyle} from '../src/styleutil'
 
 describe('filterInheritStyle testing', () => {
@@ -410,4 +409,3 @@ describe('filterInheritStyle testing', () => {
         })
     })
 })
-*/
