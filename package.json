@@ -12,6 +12,12 @@
 		"react-native": "^0.64.0",
 		"typescript": "^4.2.3"
 	},
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"author": {
+		"name": "Flam3rboy",
+		"url": "https://github.com/flam3rboy"
+	},
 	"scripts": {
 		"build": "tsc -b .",
 		"test": "jest --config=jest.config.js"
