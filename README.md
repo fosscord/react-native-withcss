@@ -33,9 +33,9 @@ Add this to the `.babelrc` file
 }
 ```
 
-#### 2. install `@areslabs/react-native-withcss`
+#### 2. install `github:fosscord/react-native-withcss`
 ```
-npm install @areslabs/react-native-withcss --save
+npm install github:fosscord/react-native-withcss --save
 ```
 
 #### 3. Add command cssWatch
@@ -57,7 +57,7 @@ Take a demo project as an example:
 App.js
 ```javascript
 import React from 'react'
-import { StylesProvider, Text, View } from '@areslabs/react-native-withcss'
+import { StylesProvider, Text, View } from 'react-native-withcss'
 
 import AppStyles from './App.css'
 
@@ -88,7 +88,7 @@ Text {
     line-height: 50px;
 }
 ```
-Note that the components that use RN now need `import { Text, View } from '@areslabs/react-native-withcss'`
+Note that the components that use RN now need `import { Text, View } from 'react-native-withcss'`
 
 ## Live Reload / Hot Reload
 React Native itself provides the functionality of Live Reload / Hot Reload. 
@@ -182,12 +182,12 @@ XXX {
 
 In addition, react-native-withcss provides a set of basic components that correspond to React Native. By default, ClassEnable function is enabled, so when using basic components, it is recommended:
 ```javascript
-Import {View, Text ...} from '@areslabs/react-native-withcss'
+Import {View, Text ...} from 'react-native-withcss'
 ```
 Or you may need to use it all components
 ```javascript
 import {View, Text} from 'react-native'
-import {View as CSSView , Text as CSSText...} from '@areslabs/react-native-withcss'
+import {View as CSSView , Text as CSSText...} from 'react-native-withcss'
 ```
 ## attribute shorthand
 such as
