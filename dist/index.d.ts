@@ -38,9 +38,9 @@ export declare const ToolbarAndroid: typeof RN.ToolbarAndroid;
 export declare const Touchable: {
     TOUCH_TARGET_DEBUG: boolean;
     renderDebugView: (config: {
-        color: string | number;
+        color: React.ReactText;
         hitSlop?: RN.Insets | undefined;
-    }) => React.ReactElement<any, string | React.JSXElementConstructor<any>> | null;
+    }) => React.ReactElement<any, string | ((props: any) => React.ReactElement<any, any> | null) | (new (props: any) => React.Component<any, any, any>)> | null;
 };
 export declare const TouchableHighlight: typeof RN.TouchableHighlight;
 export declare const TouchableNativeFeedback: typeof RN.TouchableNativeFeedback;
