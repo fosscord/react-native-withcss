@@ -18,5 +18,5 @@
 		"isolatedModules": true,
 		"jsx": "react"
 	},
-	"include": ["src"]
+	"include": ["old"]
 }
