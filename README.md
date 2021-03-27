@@ -4,8 +4,8 @@
 
 
 # react-native-withcss
-
-[中文](./README.zh.md)
+## Maintained by Fosscord
+Forked from https://github.com/areslabs/react-native-withcss
 
 [react-native]() + css, cool!
 
