@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -23,6 +24,25 @@ var __assign = (this && this.__assign) || function () {
         return t;
     };
     return __assign.apply(this, arguments);
+};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 var __values = (this && this.__values) || function(o) {
     var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
@@ -51,11 +71,13 @@ var __read = (this && this.__read) || function (o, n) {
     }
     return ar;
 };
-import React, { Component } from "react";
-import { ThemeContext } from "./ThemeContext";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StyleConsumer = exports.getParents = exports.getStyles = exports.childStyleCalc = exports.match = void 0;
+var react_1 = __importStar(require("react"));
+var ThemeContext_1 = require("./ThemeContext");
 // TODO: for react native, check @media rules
 // check if the fiber node matches the tag, id or classes
-export function match(fiber, selector) {
+function match(fiber, selector) {
     if (!fiber)
         return false;
     var props = fiber.memoizedProps || {};
@@ -70,8 +92,9 @@ export function match(fiber, selector) {
         return true;
     return false;
 }
+exports.match = match;
 // check recursivly if the selection path matches any parent path combinaten
-export function childStyleCalc(parents, selection) {
+function childStyleCalc(parents, selection) {
     var e_1, _a, e_2, _b;
     try {
         for (var _c = __values(selection.entries()), _d = _c.next(); !_d.done; _d = _c.next()) {
@@ -107,8 +130,9 @@ export function childStyleCalc(parents, selection) {
     }
     return false;
 }
+exports.childStyleCalc = childStyleCalc;
 // check if any styles match for this fiber node and return them
-export function getStyles(fiber, rules) {
+function getStyles(fiber, rules) {
     var e_3, _a;
     if (rules === void 0) { rules = []; }
     if (!fiber)
@@ -140,15 +164,17 @@ export function getStyles(fiber, rules) {
     }
     return style;
 }
+exports.getStyles = getStyles;
 // get an returns all parents of the fiber node in order: root -> child
-export function getParents(fiber, parents) {
+function getParents(fiber, parents) {
     if (parents === void 0) { parents = []; }
     parents.push(fiber);
     if (fiber === null || fiber === void 0 ? void 0 : fiber._debugOwner)
         return getParents(fiber._debugOwner, parents);
     return parents.reverse();
 }
-export function StyleConsumer(Comp, tagName) {
+exports.getParents = getParents;
+function StyleConsumer(Comp, tagName) {
     if (!Comp)
         throw new Error("Please specify a component");
     // @ts-ignore
@@ -163,13 +189,13 @@ export function StyleConsumer(Comp, tagName) {
                 var styles = getStyles(_this._reactInternals, []);
                 console.log("[Style] calc: " + (performance.now() - start) + "ms");
                 // @ts-ignore
-                return React.createElement(Comp, __assign(__assign({}, _this.props), { styles: styles }), _this.props.children);
+                return react_1.default.createElement(Comp, __assign(__assign({}, _this.props), { styles: styles }), _this.props.children);
             };
             return _this;
         }
-        StyleConsumer.contextType = ThemeContext;
+        StyleConsumer.contextType = ThemeContext_1.ThemeContext;
         return StyleConsumer;
-    }(Component));
+    }(react_1.Component));
     Object.defineProperties(StyleConsumer, {
         name: {
             value: name,
@@ -178,3 +204,4 @@ export function StyleConsumer(Comp, tagName) {
     // @ts-ignore
     return StyleConsumer;
 }
+exports.StyleConsumer = StyleConsumer;

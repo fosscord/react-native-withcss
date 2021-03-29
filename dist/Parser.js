@@ -1,4 +1,10 @@
-import css from "css";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parse = void 0;
+var css_1 = __importDefault(require("css"));
 var SPLIT_CSS = /(?=[.#])/g;
 function handleRule(rule) {
     var _a, _b;
@@ -48,8 +54,8 @@ function handleRule(rule) {
     });
     return { selectors: selectors, declarations: declarations, type: type };
 }
-export function parse(str) {
-    var stylesheet = css.parse(str, { silent: true }).stylesheet;
+function parse(str) {
+    var stylesheet = css_1.default.parse(str, { silent: true }).stylesheet;
     if (!stylesheet)
         return [];
     var rules = [];
@@ -62,3 +68,4 @@ export function parse(str) {
     });
     return rules;
 }
+exports.parse = parse;
