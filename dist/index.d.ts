@@ -1,53 +1,73 @@
-import React from "react";
+/// <reference types="react" />
 import RN from "react-native";
-import ClassEnable from "./ClassEnable";
-import StylesProvider from "./StylesProvider";
-export { ClassEnable, StylesProvider };
-export declare const ActivityIndicator: typeof RN.ActivityIndicator;
-export declare const Button: typeof RN.Button;
-export declare const DatePickerIOS: typeof RN.DatePickerIOS;
-export declare const DrawerLayoutAndroid: typeof RN.DrawerLayoutAndroid;
-export declare const Image: typeof RN.Image;
-export declare const ImageBackground: typeof RN.ImageBackground;
-export declare const ImageEditor: RN.ImageEditorStatic;
-export declare const ImageStore: RN.ImageStoreStatic;
-export declare const KeyboardAvoidingView: typeof RN.KeyboardAvoidingView;
-export declare const ListView: typeof RN.ListView;
-export declare const Modal: typeof RN.Modal;
-export declare const NavigatorIOS: typeof RN.NavigatorIOS;
-export declare const Picker: typeof RN.Picker;
-export declare const PickerIOS: typeof RN.PickerIOS;
-export declare const ProgressBarAndroid: typeof RN.ProgressBarAndroid;
-export declare const ProgressViewIOS: typeof RN.ProgressViewIOS;
-export declare const ScrollView: typeof RN.ScrollView;
-export declare const SegmentedControlIOS: typeof RN.SegmentedControlIOS;
-export declare const Slider: typeof RN.Slider;
-export declare const SnapshotViewIOS: typeof RN.SnapshotViewIOS;
-export declare const Switch: typeof RN.Switch;
-export declare const RecyclerViewBackedScrollView: typeof RN.RecyclerViewBackedScrollView;
-export declare const RefreshControl: typeof RN.RefreshControl;
-export declare const SafeAreaView: typeof RN.SafeAreaView;
-export declare const StatusBar: typeof RN.StatusBar;
-export declare const SwipeableListView: typeof RN.SwipeableListView;
-export declare const SwitchIOS: typeof RN.SwitchIOS;
-export declare const TabBarIOS: typeof RN.TabBarIOS;
-export declare const Text: typeof RN.Text;
-export declare const TextInput: typeof RN.TextInput;
-export declare const ToastAndroid: RN.ToastAndroidStatic;
-export declare const ToolbarAndroid: typeof RN.ToolbarAndroid;
-export declare const Touchable: {
-    TOUCH_TARGET_DEBUG: boolean;
-    renderDebugView: (config: {
-        color: React.ReactText;
-        hitSlop?: RN.Insets | undefined;
-    }) => React.ReactElement<any, string | ((props: any) => React.ReactElement<any, any> | null) | (new (props: any) => React.Component<any, any, any>)> | null;
-};
-export declare const TouchableHighlight: typeof RN.TouchableHighlight;
-export declare const TouchableNativeFeedback: typeof RN.TouchableNativeFeedback;
-export declare const TouchableOpacity: typeof RN.TouchableOpacity;
-export declare const TouchableWithoutFeedback: typeof RN.TouchableWithoutFeedback;
-export declare const View: typeof RN.View;
-export declare const ViewPagerAndroid: typeof RN.ViewPagerAndroid;
-export declare const FlatList: typeof RN.FlatList;
-export declare const SectionList: typeof RN.SectionList;
-export declare const VirtualizedList: typeof RN.VirtualizedList;
+export * from "./Consumer";
+export * from "./Parser";
+export * from "./ThemeContext";
+export declare const View: RN.Constructor<RN.View & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const ActivityIndicator: RN.Constructor<RN.ActivityIndicator & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const Button: RN.Constructor<RN.Button & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const FlatList: RN.Constructor<RN.FlatList<any> & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const Image: RN.Constructor<RN.Image & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const ImageBackground: RN.Constructor<RN.ImageBackground & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const KeyboardAvoidingView: RN.Constructor<RN.KeyboardAvoidingView & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const Modal: RN.Constructor<RN.Modal & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const Pressable: RN.Constructor<any>;
+export declare const RefreshControl: RN.Constructor<RN.RefreshControl & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const ScrollView: RN.Constructor<RN.ScrollView & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const SectionList: RN.Constructor<RN.SectionList<any, RN.DefaultSectionT> & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const StatusBar: RN.Constructor<RN.StatusBar & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const Switch: RN.Constructor<RN.Switch & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const Text: RN.Constructor<RN.Text & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const TextInput: RN.Constructor<RN.TextInput & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const TouchableHighlight: RN.Constructor<RN.TouchableHighlight & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const TouchableOpacity: RN.Constructor<RN.TouchableOpacity & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const TouchableWithoutFeedback: RN.Constructor<RN.TouchableWithoutFeedback & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const VirtualizedList: RN.Constructor<any>;
+export declare const DrawerLayoutAndroid: RN.Constructor<RN.DrawerLayoutAndroid & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const TouchableNativeFeedback: RN.Constructor<RN.TouchableNativeFeedback & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const InputAccessoryView: RN.Constructor<RN.InputAccessoryView & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
+export declare const SafeAreaView: RN.Constructor<RN.SafeAreaView & import("react").Component<{
+    className?: string | undefined;
+}, {}, any>>;
