@@ -1,5 +1,5 @@
 import { Component, FunctionComponent } from "react";
-import { Rules, Selector } from "./Parser";
+import { Rules, Selector } from "./Types";
 import { Constructor } from "react-native";
 export declare type FiberNode = any;
 export declare function match(fiber: FiberNode, selector: Selector): boolean;

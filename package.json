@@ -6,7 +6,8 @@
 	"exports": {
 		"./": "./dist/index.js",
 		"./package.json": "./package.json",
-		"./babel": "./dist/BabelPlugin.js"
+		"./babel": "./dist/BabelPlugin.js",
+		"./parser": "./dist/Parser.js"
 	},
 	"dependencies": {
 		"css": "^2.2.4",

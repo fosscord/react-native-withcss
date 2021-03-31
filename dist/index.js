@@ -15,7 +15,6 @@ exports.SafeAreaView = exports.InputAccessoryView = exports.TouchableNativeFeedb
 var react_native_1 = require("react-native");
 var Consumer_1 = require("./Consumer");
 __exportStar(require("./Consumer"), exports);
-__exportStar(require("./Parser"), exports);
 __exportStar(require("./ThemeContext"), exports);
 exports.View = Consumer_1.StyleConsumer(react_native_1.View, "View");
 exports.ActivityIndicator = Consumer_1.StyleConsumer(react_native_1.ActivityIndicator, "ActivityIndicator");

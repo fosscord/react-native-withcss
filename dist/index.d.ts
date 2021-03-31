@@ -1,7 +1,6 @@
 /// <reference types="react" />
 import { ActivityIndicator as RNActivityIndicator, View as RNView, Button as RNButton, FlatList as RNFlatList, Image as RNImage, ImageBackground as RNImageBackground, KeyboardAvoidingView as RNKeyboardAvoidingView, Modal as RNModal, RefreshControl as RNRefreshControl, ScrollView as RNScrollView, SectionList as RNSectionList, StatusBar as RNStatusBar, Switch as RNSwitch, Text as RNText, TextInput as RNTextInput, TouchableHighlight as RNTouchableHighlight, TouchableOpacity as RNTouchableOpacity, TouchableWithoutFeedback as RNTouchableWithoutFeedback, DrawerLayoutAndroid as RNDrawerLayoutAndroid, TouchableNativeFeedback as RNTouchableNativeFeedback, InputAccessoryView as RNInputAccessoryView, SafeAreaView as RNSafeAreaView } from "react-native";
 export * from "./Consumer";
-export * from "./Parser";
 export * from "./ThemeContext";
 export declare const View: import("react-native").Constructor<RNView & import("react").Component<{
     className?: string | undefined;
