@@ -5,6 +5,7 @@
 	"types": "dist/index.d.ts",
 	"exports": {
 		"./": "./dist/index.js",
+		"./package.json": "./package.json",
 		"./babel": "./dist/BabelPlugin.js"
 	},
 	"dependencies": {
