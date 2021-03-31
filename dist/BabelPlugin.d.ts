@@ -1,4 +1,4 @@
-export declare function ReactNativeWithCssBabelPlugin(opts: any): {
+export declare function ReactNativeWithCssBabelPlugin(opt: any): {
     manipulateOptions: (rp: any) => void;
     visitor: {
         ImportDeclaration: {

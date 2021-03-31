@@ -3,7 +3,6 @@ import { ActivityIndicator as RNActivityIndicator, View as RNView, Button as RNB
 export * from "./Consumer";
 export * from "./Parser";
 export * from "./ThemeContext";
-export * from "./BabelPlugin";
 export declare const View: import("react-native").Constructor<RNView & import("react").Component<{
     className?: string | undefined;
 }, {}, any>>;

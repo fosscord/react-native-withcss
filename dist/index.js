@@ -17,7 +17,6 @@ var Consumer_1 = require("./Consumer");
 __exportStar(require("./Consumer"), exports);
 __exportStar(require("./Parser"), exports);
 __exportStar(require("./ThemeContext"), exports);
-__exportStar(require("./BabelPlugin"), exports);
 exports.View = Consumer_1.StyleConsumer(react_native_1.View, "View");
 exports.ActivityIndicator = Consumer_1.StyleConsumer(react_native_1.ActivityIndicator, "ActivityIndicator");
 exports.Button = Consumer_1.StyleConsumer(react_native_1.Button, "Button");

@@ -1,15 +1,18 @@
 // @ts-nocheck
 
 var path = require("path");
-var fse = require("fs-extra");
+var fs = require("fs");
 
 function defaultResolve(src, file) {
 	return path.resolve(path.dirname(file), src);
 }
 
-export function ReactNativeWithCssBabelPlugin(opts) {
+var resolve;
+
+export function ReactNativeWithCssBabelPlugin(opt) {
 	var t = opt.types;
 	var template = opt.template;
+	console.log(template);
 
 	return {
 		manipulateOptions: function (rp) {
@@ -64,12 +67,15 @@ function devHandler(curPath, importPath, jsFilename) {
  * @param template
  * @param t
  */
+
 function prodHandler(curPath, opts, importPath, jsFilename, template, t) {
 	var absPath = resolve(importPath, jsFilename);
 
-	const cssStr = fse.readFileSync(absPath).toString();
-	const { styles: obj } = createStylefromCode(cssStr, absPath);
-	const cssObj = convertStylesToRNCSS(obj);
+	const cssStr = fs.readFileSync(absPath, { encoding: "utf8" });
+	const obj = {};
+	// const { styles: obj } = createStylefromCode(cssStr, absPath);
+	// const cssObj = convertStylesToRNCSS(obj);
+	const cssObj = obj;
 
 	var defautIdenti = curPath.node.specifiers[0].local.name;
 	const buildNode = template("const STYLES = STYOBJ;", { sourceType: "module" });

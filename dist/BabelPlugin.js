@@ -3,13 +3,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReactNativeWithCssBabelPlugin = void 0;
 var path = require("path");
-var fse = require("fs-extra");
+var fs = require("fs");
 function defaultResolve(src, file) {
     return path.resolve(path.dirname(file), src);
 }
-function ReactNativeWithCssBabelPlugin(opts) {
+var resolve;
+function ReactNativeWithCssBabelPlugin(opt) {
     var t = opt.types;
     var template = opt.template;
+    console.log(template);
     return {
         manipulateOptions: function (rp) {
             var resolveModuleSource = rp.resolveModuleSource;
@@ -59,9 +61,11 @@ function devHandler(curPath, importPath, jsFilename) {
  */
 function prodHandler(curPath, opts, importPath, jsFilename, template, t) {
     var absPath = resolve(importPath, jsFilename);
-    var cssStr = fse.readFileSync(absPath).toString();
-    var obj = createStylefromCode(cssStr, absPath).styles;
-    var cssObj = convertStylesToRNCSS(obj);
+    var cssStr = fs.readFileSync(absPath, { encoding: "utf8" });
+    var obj = {};
+    // const { styles: obj } = createStylefromCode(cssStr, absPath);
+    // const cssObj = convertStylesToRNCSS(obj);
+    var cssObj = obj;
     var defautIdenti = curPath.node.specifiers[0].local.name;
     var buildNode = template("const STYLES = STYOBJ;", { sourceType: "module" });
     var styleExpre = buildNode({

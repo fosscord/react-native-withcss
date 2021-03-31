@@ -29,7 +29,6 @@ import { StyleConsumer } from "./Consumer";
 export * from "./Consumer";
 export * from "./Parser";
 export * from "./ThemeContext";
-export * from "./BabelPlugin";
 
 export const View = StyleConsumer<RNView>(RNView, "View");
 export const ActivityIndicator = StyleConsumer<RNActivityIndicator>(RNActivityIndicator, "ActivityIndicator");
