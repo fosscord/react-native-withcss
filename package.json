@@ -5,12 +5,15 @@
 	"types": "dist/index.d.ts",
 	"dependencies": {
 		"css": "^2.2.4",
+		"css-to-react-native": "^3.0.0",
 		"missing-native-js-functions": "^1.2.5",
+		"node-fetch": "^2.6.1",
 		"react": "^17.0.1",
 		"react-native": "^0.64.0"
 	},
 	"devDependencies": {
 		"@types/css": "^0.0.31",
+		"@types/css-to-react-native": "^3.0.0",
 		"@types/node": "^12.20.7",
 		"@types/react": "^17.0.3",
 		"@types/react-dom": "^17.0.3",

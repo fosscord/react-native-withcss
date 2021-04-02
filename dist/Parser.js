@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parse = void 0;
 var css_1 = __importDefault(require("css"));
+var css_to_react_native_1 = __importDefault(require("css-to-react-native"));
 var SPLIT_CSS = /(?=[.#])/g;
 function handleRule(rule) {
     var _a, _b;
@@ -24,13 +25,13 @@ function handleRule(rule) {
         };
     }
     var selectors = [];
-    var declarations = {};
+    var declarationsArray = [];
     (_a = rule.declarations) === null || _a === void 0 ? void 0 : _a.forEach(function (decl) {
-        if (!decl.property)
+        if (!decl.property || !decl.value)
             return;
-        // @ts-ignore
-        declarations[decl.property] = decl.value;
+        declarationsArray.push([decl.property, decl.value]);
     });
+    var declarations = css_to_react_native_1.default(declarationsArray);
     (_b = rule.selectors) === null || _b === void 0 ? void 0 : _b.forEach(function (selector) {
         var sel = [];
         selector.split(" ").forEach(function (element) {

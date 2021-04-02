@@ -1,7 +1,7 @@
 import React, { Component, FunctionComponent } from "react";
 import { ThemeContext } from "./ThemeContext";
 import { Rules, Selector } from "./Types";
-import { Constructor } from "react-native";
+import { Constructor, StyleSheet } from "react-native";
 import "missing-native-js-functions";
 // Style Consumer calculates if the component matches any css selector and applies it style
 

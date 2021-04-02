@@ -1,5 +1,6 @@
 import css, { Declaration, Rule } from "css";
 import { Rules, Selector } from "./Types";
+import transform from "css-to-react-native";
 
 const SPLIT_CSS = /(?=[.#])/g;
 
@@ -19,13 +20,14 @@ function handleRule(rule: Rule): Rules | undefined {
 		};
 	}
 	const selectors: Selector[][] = [];
-	const declarations: Record<string, string> = {};
+	const declarationsArray: [string, string][] = [];
 
 	rule.declarations?.forEach((decl: Declaration) => {
-		if (!decl.property) return;
-		// @ts-ignore
-		declarations[decl.property] = decl.value;
+		if (!decl.property || !decl.value) return;
+		declarationsArray.push([decl.property, decl.value]);
 	});
+
+	const declarations = transform(declarationsArray) as Record<string, string>;
 
 	rule.selectors?.forEach((selector: string) => {
 		const sel: Selector[] = [];
