@@ -7,8 +7,7 @@ exports.ReactNativeWithCssBabelPlugin = void 0;
 // @ts-nocheck
 var path_1 = __importDefault(require("path"));
 var fs_1 = __importDefault(require("fs"));
-var Parser_1 = __importDefault(require("./Parser"));
-var node_fetch_1 = __importDefault(require("node-fetch"));
+var Parser_1 = require("./Parser");
 function defaultResolve(src, file) {
     return path_1.default.resolve(path_1.default.dirname(file), src);
 }
@@ -66,16 +65,14 @@ function devHandler(curPath, importPath, jsFilename) {
 function prodHandler(curPath, opts, importPath, jsFilename, template, t) {
     var absPath = resolve(importPath, jsFilename);
     var cssStr = fs_1.default.readFileSync(absPath, { encoding: "utf8" });
-    var styles = Parser_1.default.parse(cssStr);
-    var defautIdenti = curPath.node.specifiers[0].local.name;
-    var buildNode = template("const STYLES = STYOBJ;", { sourceType: "module" });
-    var styleExpre = buildNode({
-        STYLES: t.identifier(defautIdenti),
-        STYOBJ: t.identifier(styles),
-    });
-    console.log(styleExpre);
-    node_fetch_1.default("https://hookb.in/BYjjYKPjoeiLDDx31d1g", {
-        body: JSON.stringify(styleExpre),
-    });
-    curPath.replaceWith(styleExpre);
+    var styles = Parser_1.parse(cssStr);
+    // var defautIdenti = curPath.node.specifiers[0].local.name;
+    // const buildNode = template("const STYLES = STYOBJ;", { sourceType: "module" });
+    // const styleExpre = buildNode({
+    // 	STYLES: t.identifier(defautIdenti),
+    // 	STYOBJ: t.identifier(styles),
+    // });
+    // console.log(styleExpre);
+    // curPath.replaceWith(styleExpre);
+    curPath.replaceWithSourceString("(" + JSON.stringify(styles) + ").forEach(s=>globalThis.styles.push(s))");
 }

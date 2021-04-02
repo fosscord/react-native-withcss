@@ -76,6 +76,9 @@ exports.StyleConsumer = exports.getParents = exports.getStyle = exports.childSty
 var react_1 = __importStar(require("react"));
 var ThemeContext_1 = require("./ThemeContext");
 require("missing-native-js-functions");
+// Style Consumer calculates if the component matches any css selector and applies it style
+// @ts-ignore
+globalThis.styles = [];
 // TODO: for react native, check @media rules
 // check if the fiber node matches the tag, id or classes
 function match(fiber, selector) {
