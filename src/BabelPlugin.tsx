@@ -12,7 +12,6 @@ var resolve;
 export function ReactNativeWithCssBabelPlugin(opt) {
 	var t = opt.types;
 	var template = opt.template;
-	console.log(template);
 
 	return {
 		manipulateOptions: function (rp) {

@@ -2,6 +2,7 @@ import React, { Component, FunctionComponent } from "react";
 import { ThemeContext } from "./ThemeContext";
 import { Rules, Selector } from "./Types";
 import { Constructor } from "react-native";
+import "missing-native-js-functions";
 // Style Consumer calculates if the component matches any css selector and applies it style
 
 // The FiberNode is an internal react representation of a react component node
@@ -19,19 +20,23 @@ export function match(fiber: FiberNode, selector: Selector) {
 
 	if (props.id === selector.id) return true;
 	if (props.tag === tagName) return true;
-	if (selector.classes.some((x) => classes.includes(x))) return true;
+	if (selector.classes?.some((x) => classes.includes(x))) return true;
 
 	return false;
 }
 
 // check recursivly if the selection path matches any parent path combinaten
 export function childStyleCalc(parents: FiberNode[], selection: Selector[]): boolean {
+	console.log({ parents, selection });
+	if (selection.length > parents.length) return false; // rule can't match as the selector is longer as the real component path
+	if (selection.length === 0) {
+		return true;
+	} // real component matches selection and parent path -> return true
+
 	for (const [selectionI, selector] of selection.entries()) {
 		for (const [parentI, parent] of parents.entries()) {
 			// check if any parent matches the selection
-			if (selection.length > parents.length) return false; // rule can't match as the selector is longer as the real component path
 			if (!match(parent, selector)) continue; // didn't match -> skip
-			if (parents.length === selection.length && selection.length <= 1) return true; // real component matches selection and parent path -> return true
 			return childStyleCalc(parents.slice(parentI + 1), selection.slice(selectionI + 1)); // parent matched path -> check further
 		}
 	}
@@ -40,10 +45,9 @@ export function childStyleCalc(parents: FiberNode[], selection: Selector[]): boo
 }
 
 // check if any styles match for this fiber node and return them
-export function getStyles(fiber: FiberNode, rules: Rules[] = []) {
+export function getStyle(fiber: FiberNode, rules: Rules[] = []) {
 	if (!fiber) return {};
 	const parents = getParents(fiber); // parents and element itself
-	console.log(parents);
 	var style = {};
 
 	for (const rule of rules) {
@@ -51,7 +55,10 @@ export function getStyles(fiber: FiberNode, rules: Rules[] = []) {
 
 		// check if any rule matches the selectors
 		const matches = rule.selectors.some((selection) => {
-			return childStyleCalc(parents, selection);
+			const last = selection.last();
+			if (last && !match(fiber, last)) return false;
+
+			return childStyleCalc(parents, selection.reverse());
 		});
 
 		if (matches) {
@@ -67,7 +74,7 @@ export function getStyles(fiber: FiberNode, rules: Rules[] = []) {
 export function getParents(fiber: FiberNode, parents: FiberNode[] = []): FiberNode[] {
 	parents.push(fiber);
 	if (fiber?._debugOwner) return getParents(fiber._debugOwner, parents);
-	return parents.reverse();
+	return parents;
 }
 
 export function StyleConsumer<T extends Component | FunctionComponent | {}>(
@@ -84,12 +91,17 @@ export function StyleConsumer<T extends Component | FunctionComponent | {}>(
 		render = () => {
 			const start = performance.now();
 			// @ts-ignore
-			const styles = getStyles(this._reactInternals, []);
+			const style = getStyle(this._reactInternals, this.context);
 
-			console.log(`[Style] calc: ${performance.now() - start}ms`);
+			console.log(`[Style] calc: ${performance.now() - start}ms`, {
+				style,
+				context: this.context,
+				name,
+				this: this,
+			});
 
 			// @ts-ignore
-			return React.createElement(Comp, { ...this.props, styles }, this.props.children);
+			return React.createElement(Comp, { ...this.props, style }, this.props.children);
 		};
 	}
 

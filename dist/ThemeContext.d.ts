@@ -1,2 +1,3 @@
 import React from "react";
-export declare const ThemeContext: React.Context<{}>;
+import { Rules } from "./Types";
+export declare const ThemeContext: React.Context<Rules[]>;

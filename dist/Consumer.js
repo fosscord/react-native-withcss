@@ -72,12 +72,14 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StyleConsumer = exports.getParents = exports.getStyles = exports.childStyleCalc = exports.match = void 0;
+exports.StyleConsumer = exports.getParents = exports.getStyle = exports.childStyleCalc = exports.match = void 0;
 var react_1 = __importStar(require("react"));
 var ThemeContext_1 = require("./ThemeContext");
+require("missing-native-js-functions");
 // TODO: for react native, check @media rules
 // check if the fiber node matches the tag, id or classes
 function match(fiber, selector) {
+    var _a;
     if (!fiber)
         return false;
     var props = fiber.memoizedProps || {};
@@ -88,7 +90,7 @@ function match(fiber, selector) {
         return true;
     if (props.tag === tagName)
         return true;
-    if (selector.classes.some(function (x) { return classes.includes(x); }))
+    if ((_a = selector.classes) === null || _a === void 0 ? void 0 : _a.some(function (x) { return classes.includes(x); }))
         return true;
     return false;
 }
@@ -96,6 +98,12 @@ exports.match = match;
 // check recursivly if the selection path matches any parent path combinaten
 function childStyleCalc(parents, selection) {
     var e_1, _a, e_2, _b;
+    console.log({ parents: parents, selection: selection });
+    if (selection.length > parents.length)
+        return false; // rule can't match as the selector is longer as the real component path
+    if (selection.length === 0) {
+        return true;
+    } // real component matches selection and parent path -> return true
     try {
         for (var _c = __values(selection.entries()), _d = _c.next(); !_d.done; _d = _c.next()) {
             var _e = __read(_d.value, 2), selectionI = _e[0], selector = _e[1];
@@ -103,12 +111,8 @@ function childStyleCalc(parents, selection) {
                 for (var _f = (e_2 = void 0, __values(parents.entries())), _g = _f.next(); !_g.done; _g = _f.next()) {
                     var _h = __read(_g.value, 2), parentI = _h[0], parent_1 = _h[1];
                     // check if any parent matches the selection
-                    if (selection.length > parents.length)
-                        return false; // rule can't match as the selector is longer as the real component path
                     if (!match(parent_1, selector))
                         continue; // didn't match -> skip
-                    if (parents.length === selection.length && selection.length <= 1)
-                        return true; // real component matches selection and parent path -> return true
                     return childStyleCalc(parents.slice(parentI + 1), selection.slice(selectionI + 1)); // parent matched path -> check further
                 }
             }
@@ -132,13 +136,12 @@ function childStyleCalc(parents, selection) {
 }
 exports.childStyleCalc = childStyleCalc;
 // check if any styles match for this fiber node and return them
-function getStyles(fiber, rules) {
+function getStyle(fiber, rules) {
     var e_3, _a;
     if (rules === void 0) { rules = []; }
     if (!fiber)
         return {};
     var parents = getParents(fiber); // parents and element itself
-    console.log(parents);
     var style = {};
     try {
         for (var rules_1 = __values(rules), rules_1_1 = rules_1.next(); !rules_1_1.done; rules_1_1 = rules_1.next()) {
@@ -147,7 +150,10 @@ function getStyles(fiber, rules) {
                 continue;
             // check if any rule matches the selectors
             var matches = rule.selectors.some(function (selection) {
-                return childStyleCalc(parents, selection);
+                var last = selection.last();
+                if (last && !match(fiber, last))
+                    return false;
+                return childStyleCalc(parents, selection.reverse());
             });
             if (matches) {
                 // apply/merge the style
@@ -164,14 +170,14 @@ function getStyles(fiber, rules) {
     }
     return style;
 }
-exports.getStyles = getStyles;
+exports.getStyle = getStyle;
 // get an returns all parents of the fiber node in order: root -> child
 function getParents(fiber, parents) {
     if (parents === void 0) { parents = []; }
     parents.push(fiber);
     if (fiber === null || fiber === void 0 ? void 0 : fiber._debugOwner)
         return getParents(fiber._debugOwner, parents);
-    return parents.reverse();
+    return parents;
 }
 exports.getParents = getParents;
 function StyleConsumer(Comp, tagName) {
@@ -186,10 +192,15 @@ function StyleConsumer(Comp, tagName) {
             _this.render = function () {
                 var start = performance.now();
                 // @ts-ignore
-                var styles = getStyles(_this._reactInternals, []);
-                console.log("[Style] calc: " + (performance.now() - start) + "ms");
+                var style = getStyle(_this._reactInternals, _this.context);
+                console.log("[Style] calc: " + (performance.now() - start) + "ms", {
+                    style: style,
+                    context: _this.context,
+                    name: name,
+                    this: _this,
+                });
                 // @ts-ignore
-                return react_1.default.createElement(Comp, __assign(__assign({}, _this.props), { styles: styles }), _this.props.children);
+                return react_1.default.createElement(Comp, __assign(__assign({}, _this.props), { style: style }), _this.props.children);
             };
             return _this;
         }

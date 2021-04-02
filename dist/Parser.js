@@ -59,7 +59,6 @@ function parse(str) {
     if (!stylesheet)
         return [];
     var rules = [];
-    console.log(stylesheet);
     stylesheet.rules.forEach(function (r) {
         var result = handleRule(r);
         if (!result)

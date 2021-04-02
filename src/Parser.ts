@@ -57,8 +57,6 @@ export function parse(str: string): Rules[] {
 
 	const rules: Rules[] = [];
 
-	console.log(stylesheet);
-
 	stylesheet.rules.forEach((r: Rule) => {
 		const result = handleRule(r);
 		if (!result) return;

@@ -5,6 +5,7 @@
 	"types": "dist/index.d.ts",
 	"dependencies": {
 		"css": "^2.2.4",
+		"missing-native-js-functions": "^1.2.5",
 		"react": "^17.0.1",
 		"react-native": "^0.64.0",
 		"react-native-withcss": "github:fosscord/react-native-withcss"

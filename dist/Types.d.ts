@@ -30,7 +30,7 @@ export interface Position {
 export interface Selector {
     tag?: string;
     id?: string;
-    classes: string[];
+    classes?: string[];
 }
 export interface Rules {
     selectors?: Selector[][];
