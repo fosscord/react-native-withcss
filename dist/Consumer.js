@@ -98,7 +98,6 @@ exports.match = match;
 // check recursivly if the selection path matches any parent path combinaten
 function childStyleCalc(parents, selection) {
     var e_1, _a, e_2, _b;
-    console.log({ parents: parents, selection: selection });
     if (selection.length > parents.length)
         return false; // rule can't match as the selector is longer as the real component path
     if (selection.length === 0) {
@@ -192,7 +191,7 @@ function StyleConsumer(Comp, tagName) {
             _this.render = function () {
                 var start = performance.now();
                 // @ts-ignore
-                var style = getStyle(_this._reactInternals, _this.context);
+                var style = getStyle(_this._reactInternals || _this._reactInternalFiber, _this.context);
                 console.log("[Style] calc: " + (performance.now() - start) + "ms", {
                     style: style,
                     context: _this.context,

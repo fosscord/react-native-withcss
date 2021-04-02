@@ -27,7 +27,6 @@ export function match(fiber: FiberNode, selector: Selector) {
 
 // check recursivly if the selection path matches any parent path combinaten
 export function childStyleCalc(parents: FiberNode[], selection: Selector[]): boolean {
-	console.log({ parents, selection });
 	if (selection.length > parents.length) return false; // rule can't match as the selector is longer as the real component path
 	if (selection.length === 0) {
 		return true;
@@ -91,7 +90,7 @@ export function StyleConsumer<T extends Component | FunctionComponent | {}>(
 		render = () => {
 			const start = performance.now();
 			// @ts-ignore
-			const style = getStyle(this._reactInternals, this.context);
+			const style = getStyle(this._reactInternals || this._reactInternalFiber, this.context);
 
 			console.log(`[Style] calc: ${performance.now() - start}ms`, {
 				style,
