@@ -10,3 +10,4 @@ export declare function getParents(fiber: FiberNode, parents?: FiberNode[]): Fib
 export declare function StyleConsumer<T extends Component | FunctionComponent | {}>(Comp: T, tagName?: string): Constructor<T & Component<{
     className?: string;
 }>>;
+export declare type Style = Record<string, string | number>;

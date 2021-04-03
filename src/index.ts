@@ -1,4 +1,5 @@
 // @ts-nocheck
+export * from "./Provider";
 import {
 	ActivityIndicator as RNActivityIndicator,
 	View as RNView,

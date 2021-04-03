@@ -4,8 +4,6 @@ import { Rules, Selector } from "./Types";
 import { Constructor, StyleSheet } from "react-native";
 import "missing-native-js-functions";
 // Style Consumer calculates if the component matches any css selector and applies it style
-// @ts-ignore
-globalThis.styles = [];
 
 // The FiberNode is an internal react representation of a react component node
 export type FiberNode = any;
@@ -102,7 +100,7 @@ export function StyleConsumer<T extends Component | FunctionComponent | {}>(
 			});
 
 			// @ts-ignore
-			return React.createElement(Comp, { ...this.props, style }, this.props.children);
+			return React.createElement(Comp, { style, ...this.props }, this.props.children);
 		};
 	}
 
@@ -115,3 +113,5 @@ export function StyleConsumer<T extends Component | FunctionComponent | {}>(
 	// @ts-ignore
 	return StyleConsumer;
 }
+
+export type Style = Record<string, string | number>;
