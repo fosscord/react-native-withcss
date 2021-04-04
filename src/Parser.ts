@@ -20,10 +20,15 @@ function handleRule(rule: Rule): Rules | undefined {
 		};
 	}
 	const selectors: Selector[][] = [];
+	const preDeclarations: any = {}; // used for :root css variables
 	const declarationsArray: [string, string][] = [];
 
 	rule.declarations?.forEach((decl: Declaration) => {
 		if (!decl.property || !decl.value) return;
+		if (decl.property.startsWith("--") || decl.value.startsWith("var(")) {
+			preDeclarations[decl.property] = decl.value;
+			return;
+		}
 		declarationsArray.push([decl.property, decl.value]);
 	});
 
@@ -58,6 +63,7 @@ export function parse(str: string): Rules[] {
 	if (!stylesheet) return [];
 
 	const rules: Rules[] = [];
+	console.log(stylesheet);
 
 	stylesheet.rules.forEach((r: Rule) => {
 		const result = handleRule(r);

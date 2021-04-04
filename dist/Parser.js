@@ -25,10 +25,15 @@ function handleRule(rule) {
         };
     }
     var selectors = [];
+    var preDeclarations = {}; // used for :root css variables
     var declarationsArray = [];
     (_a = rule.declarations) === null || _a === void 0 ? void 0 : _a.forEach(function (decl) {
         if (!decl.property || !decl.value)
             return;
+        if (decl.property.startsWith("--")) {
+            preDeclarations[decl.property] = decl.value;
+            return;
+        }
         declarationsArray.push([decl.property, decl.value]);
     });
     var declarations = css_to_react_native_1.default(declarationsArray);
@@ -60,6 +65,7 @@ function parse(str) {
     if (!stylesheet)
         return [];
     var rules = [];
+    console.log(stylesheet);
     stylesheet.rules.forEach(function (r) {
         var result = handleRule(r);
         if (!result)
