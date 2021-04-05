@@ -9,7 +9,7 @@ import { Rules } from "./Types";
 // @ts-ignore
 if (!globalThis.styles) globalThis.styles = [];
 
-export function StyleProvider({ props }: any) {
+export function StyleProvider(props: any) {
 	const window = useWindowDimensions();
 	const colorScheme = useColorScheme();
 	const { portrait, landscape } = useDeviceOrientation();
@@ -50,5 +50,5 @@ export function StyleProvider({ props }: any) {
 		// @ts-ignore
 	}, globalThis.styles);
 
-	return <ThemeContext.Provider value={styles}>{props.children}</ThemeContext.Provider>;
+	return React.createElement(ThemeContext.Provider, { value: styles, ...props }, props?.children);
 }
