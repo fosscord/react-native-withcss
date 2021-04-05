@@ -8,8 +8,7 @@ import { Rules } from "./Types";
 // @ts-ignore
 if (!globalThis.styles) globalThis.styles = [];
 
-// @ts-ignore
-export function StyleProvider({ props }) {
+export function StyleProvider({ props }: any) {
 	const window = useWindowDimensions();
 	const colorScheme = useColorScheme();
 	const { portrait, landscape } = useDeviceOrientation();

@@ -12,6 +12,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SafeAreaView = exports.InputAccessoryView = exports.TouchableNativeFeedback = exports.DrawerLayoutAndroid = exports.VirtualizedList = exports.TouchableWithoutFeedback = exports.TouchableOpacity = exports.TouchableHighlight = exports.TextInput = exports.Text = exports.Switch = exports.StatusBar = exports.SectionList = exports.ScrollView = exports.RefreshControl = exports.Pressable = exports.Modal = exports.KeyboardAvoidingView = exports.ImageBackground = exports.Image = exports.FlatList = exports.Button = exports.ActivityIndicator = exports.View = void 0;
 // @ts-nocheck
+__exportStar(require("./Provider"), exports);
 var react_native_1 = require("react-native");
 var Consumer_1 = require("./Consumer");
 __exportStar(require("./Consumer"), exports);

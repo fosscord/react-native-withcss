@@ -30,7 +30,7 @@ function handleRule(rule) {
     (_a = rule.declarations) === null || _a === void 0 ? void 0 : _a.forEach(function (decl) {
         if (!decl.property || !decl.value)
             return;
-        if (decl.property.startsWith("--")) {
+        if (decl.property.startsWith("--") || decl.value.startsWith("var(")) {
             preDeclarations[decl.property] = decl.value;
             return;
         }
