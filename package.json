@@ -4,14 +4,13 @@
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"dependencies": {
-		"@react-native-community/hooks": "^2.6.0",
 		"css": "^2.2.4",
 		"css-mediaquery": "github:fosscord/css-mediaquery",
 		"css-to-react-native": "^3.0.0",
 		"missing-native-js-functions": "^1.2.5",
 		"node-fetch": "^2.6.1",
-		"react": "^17.0.1",
-		"react-native": "^0.64.0"
+		"react": "^16.13.1",
+		"react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz"
 	},
 	"devDependencies": {
 		"@types/css": "^0.0.31",
