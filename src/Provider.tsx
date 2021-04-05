@@ -1,3 +1,4 @@
+import React from "react";
 import MediaQuery from "css-mediaquery";
 import { useColorScheme, useWindowDimensions } from "react-native";
 import { useDeviceOrientation, useAccessibilityInfo } from "@react-native-community/hooks";
