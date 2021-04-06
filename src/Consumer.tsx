@@ -34,6 +34,7 @@ export function childStyleCalc(parents: FiberNode[], selection: Selector[]): boo
 
 	for (const [selectionI, selector] of selection.entries()) {
 		for (const [parentI, parent] of parents.entries()) {
+			if (selectionI > parents.length) break;
 			// check if any parent matches the selection
 			if (!match(parent, selector)) continue; // didn't match -> skip
 			return childStyleCalc(parents.slice(parentI + 1), selection.slice(selectionI + 1)); // parent matched path -> check further
@@ -90,7 +91,10 @@ export function StyleConsumer<T extends Component | FunctionComponent | {}>(
 		render = () => {
 			const start = performance.now();
 			// @ts-ignore
-			const style = getStyle(this._reactInternals || this._reactInternalFiber, this.context);
+			const cssStyles = getStyle(this._reactInternals || this._reactInternalFiber, this.context);
+
+			// @ts-ignore
+			const style = { ...this.props.style, ...cssStyles };
 
 			console.log(`[Style] calc: ${performance.now() - start}ms`, {
 				style,
@@ -100,7 +104,7 @@ export function StyleConsumer<T extends Component | FunctionComponent | {}>(
 			});
 
 			// @ts-ignore
-			return React.createElement(Comp, { style, ...this.props }, this.props.children);
+			return React.createElement(Comp, { ...this.props, style }, this.props.children);
 		};
 	}
 

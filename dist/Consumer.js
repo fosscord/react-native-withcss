@@ -109,6 +109,8 @@ function childStyleCalc(parents, selection) {
             try {
                 for (var _f = (e_2 = void 0, __values(parents.entries())), _g = _f.next(); !_g.done; _g = _f.next()) {
                     var _h = __read(_g.value, 2), parentI = _h[0], parent_1 = _h[1];
+                    if (selectionI > parents.length)
+                        break;
                     // check if any parent matches the selection
                     if (!match(parent_1, selector))
                         continue; // didn't match -> skip
@@ -191,7 +193,9 @@ function StyleConsumer(Comp, tagName) {
             _this.render = function () {
                 var start = performance.now();
                 // @ts-ignore
-                var style = getStyle(_this._reactInternals || _this._reactInternalFiber, _this.context);
+                var cssStyles = getStyle(_this._reactInternals || _this._reactInternalFiber, _this.context);
+                // @ts-ignore
+                var style = __assign(__assign({}, cssStyles), _this.props.style);
                 console.log("[Style] calc: " + (performance.now() - start) + "ms", {
                     style: style,
                     context: _this.context,
@@ -199,7 +203,7 @@ function StyleConsumer(Comp, tagName) {
                     this: _this,
                 });
                 // @ts-ignore
-                return react_1.default.createElement(Comp, __assign({ style: style }, _this.props), _this.props.children);
+                return react_1.default.createElement(Comp, __assign(__assign({}, _this.props), { style: style }), _this.props.children);
             };
             return _this;
         }
